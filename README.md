@@ -19,7 +19,7 @@ $ vault write ssh/roles/otp_temp_user_role \
      cidr_list=0.0.0.0/0
 
 # 서버에 신규 사용자 추가
-$vault write ssh/roles/otp_add_user_role \
+$ vault write ssh/roles/otp_add_user_role \
      key_type=otp \
      default_user=ubuntu \
      allowed_user=ubuntu \
