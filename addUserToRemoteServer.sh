@@ -81,16 +81,17 @@ if ! [ -d "${Dir}" ]; then
 fi
 
 if ! [ -f "${TemplateFile}" ]; then
-  cat <<EOF > ${TemplateFile}
+  sudo cat <<EOF > ${TemplateFile}
 {
   "users": [
   ]
 }
 EOF
+  sudo chmod 777 $TemplateFile
 fi
 
 if ! [ -f "${File}" ]; then
-  touch $File
+  sudo touch $File
   sudo chmod 777 $File
   jq ".users[.users| length] |= . + {\"name\":\"${name}\",\"directory\":\"${directory}\",\"group\":\"${group}\",\"shell\":\"${shell}\"}"  $TemplateFile >> $File
 else
@@ -100,10 +101,10 @@ else
   if [ -z "${checkItem}" ]; then # If not exist user inforamtion in the user file
     echo "[Info] Add a new information to file -  ${name}"
 
-    rm -rf $TemplateFile
+    sudo rm -rf $TemplateFile
     jq ".users[.users| length] |= . + {\"name\":\"${name}\",\"directory\":\"${directory}\",\"group\":\"${group}\",\"shell\":\"${shell}\"}"  $File >> $TemplateFile
-    rm -rf $File
-    cp $TemplateFile $File
+    sudo rm -rf $File
+    sudo cp $TemplateFile $File
   else   # If exist user inforamtion in the user file
     echo "[Error] There are user information already in the user.json file -  ${name}"
     exit 1
