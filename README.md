@@ -4,6 +4,7 @@
 ### Admin Server
 
 ```console
+$ chmod +x ./addUserToRemoteServer.sh
 $ export VAULT_ADDR="http://172.31.37.26:8200"
 $ vault login
 Token (will be hidden): hvs.zpu3IwU6OyNBg7iDN8DbWb3K
