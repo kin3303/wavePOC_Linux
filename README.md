@@ -10,6 +10,11 @@ $ vault login
   Token (will be hidden): hvs.zpu3IwU6OyNBg7iDN8DbWb3K
 
 $ SERVER_IP="172.31.43.91"
+$  vault write mysql/roles/linux-acc \
+    db_name=mysql-database \
+    creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" \
+    default_ttl="5m" \
+    max_ttl="5m"
 $ NEW_USER=$(vault read mysql/creds/linux-acc -format=json | jq .data.username |  tr -d '"')
 $ vault write ssh/roles/otp_temp_user_role \
      key_type=otp \
@@ -33,6 +38,7 @@ $ SSH_TEMP_USER_PASS=$(vault write ssh/creds/otp_temp_user_role ip=$SERVER_IP -f
 $ sshpass -p $SSH_TEMP_USER_PASS ssh $NEW_USER@$SERVER_IP
 
 # SSH 접속 30분후 안되는것 
+$ SSH_TEMP_USER_PASS=$(vault write ssh/creds/otp_temp_user_role ip=$SERVER_IP -format=json | jq .data.key |  tr -d '"') 
 $ sshpass -p $SSH_TEMP_USER_PASS ssh $NEW_USER@$SERVER_IP
 ```
  
