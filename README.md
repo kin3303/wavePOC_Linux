@@ -1,5 +1,12 @@
 # wavePOC_Linux
 
+### Target Server 준비사항
+
+jq 를 미리 설치해 놓아야 한다.
+
+```console
+sudo apt install jq -y
+```
 
 ### Admin Server
 
