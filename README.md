@@ -23,7 +23,7 @@ $ vault write ssh/roles/otp_temp_user_role \
      key_bits=2048 \
      cidr_list=0.0.0.0/0
 
-# 서버에 신규 사용자 추가
+# master 계정으로 서버에 신규 사용자 추가
 $ vault write ssh/roles/otp_add_user_role \
      key_type=otp \
      default_user=ubuntu \
