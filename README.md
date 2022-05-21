@@ -1,7 +1,7 @@
 # wavePOC_Linux
 
 
-### Step 1 > Admin Server 에서 SSH Onetime pass 를 이용해서 BationHost 에 접근 후 신규 유저 생성
+### Step 1 > Admin Server 에서 BationHost 에 접근 후 신규 유저 생성
 
 ```console
 $ chmod +x ./addUserToRemoteServer.sh
