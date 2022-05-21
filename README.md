@@ -37,7 +37,7 @@ $ sshpass -p $SSH_PASS ssh ubuntu@$SERVER_IP "bash -s" -- < ./addUserToRemoteSer
 $ SSH_TEMP_USER_PASS=$(vault write ssh/creds/otp_temp_user_role ip=$SERVER_IP -format=json | jq .data.key |  tr -d '"') 
 $ sshpass -p $SSH_TEMP_USER_PASS ssh $NEW_USER@$SERVER_IP
 
-# SSH 접속 30분후 안되는것 
+# SSH 접속 5분후 안되는것 
 $ SSH_TEMP_USER_PASS=$(vault write ssh/creds/otp_temp_user_role ip=$SERVER_IP -format=json | jq .data.key |  tr -d '"') 
 $ sshpass -p $SSH_TEMP_USER_PASS ssh $NEW_USER@$SERVER_IP
 ```
