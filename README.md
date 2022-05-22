@@ -12,7 +12,3 @@ $ export VAULT_ADDR="http://172.31.37.26:8200"
 $ export VAULT_TOKEN="hvs.zpu3IwU6OyNBg7iDN8DbWb3K"
 $ ./userManagementToServer.sh -s 172.31.43.91 -n <USER_NAME>
 ```
-
-- https://github.com/hashicorp/vault-provision-example
-- https://www.hashicorp.com/blog/codifying-vault-policies-and-configuration
-- https://code.stanford.edu/et-public/cloud-scripts/-/tree/master/
