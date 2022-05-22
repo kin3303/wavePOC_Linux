@@ -11,5 +11,7 @@ $ chmod +x ./userManagementToServer.sh
 $ ./userManagementToServer.sh -s 172.31.43.91 -n <USER_NAME>
 ```
 
-https://www.hashicorp.com/blog/codifying-vault-policies-and-configuration
-https://code.stanford.edu/et-public/cloud-scripts/-/tree/master/
+설치 부분 자동화..
+
+- https://www.hashicorp.com/blog/codifying-vault-policies-and-configuration
+- https://code.stanford.edu/et-public/cloud-scripts/-/tree/master/
