@@ -40,8 +40,8 @@ vault login hvs.zpu3IwU6OyNBg7iDN8DbWb3K
 #---------------------------------------------------------------
 #  Set Account Role
 #---------------------------------------------------------------
-vault write mysql/roles/acc_$username \
-    db_name=mysql-database \
+vault write db/roles/acc_$username \
+    db_name=mysqldb \
     creation_statements="CREATE USER '{{name}}'@'%' IDENTIFIED BY '{{password}}';GRANT SELECT ON *.* TO '{{name}}'@'%';" \
     default_ttl="${validtime}" \
     max_ttl="${validtime}"
@@ -49,15 +49,15 @@ vault write mysql/roles/acc_$username \
 #---------------------------------------------------------------
 # Add a temporary user to target server
 #---------------------------------------------------------------
-temp_user=$(vault read mysql/creds/acc_$username -format=json | jq .data.username |  tr -d '"')
-master_user_onetime_pass=$(vault write ssh/creds/otp_add_user_role ip=$server -format=json | jq .data.key |  tr -d '"') 
+temp_user=$(vault read db/creds/acc_$username -format=json | jq .data.username |  tr -d '"')
+master_user_onetime_pass=$(vault write ssh-client-onetime-pass/creds/otp_$username_role ip=$server -format=json | jq .data.key |  tr -d '"') 
 sshpass -p $master_user_onetime_pass ssh ubuntu@$server "bash -s" -- < ./addUserToRemoteServer.sh -n $temp_user
  
 
 #---------------------------------------------------------------
 # Set SSH Role  
 #---------------------------------------------------------------
-vault write ssh/roles/otp_role_$temp_user \
+vault write ssh-client-onetime-pass/roles/otp_role_$temp_user \
      key_type=otp \
      default_user=$temp_user \
      allowed_user=$temp_user \
@@ -65,7 +65,7 @@ vault write ssh/roles/otp_role_$temp_user \
      cidr_list=0.0.0.0/0
 	 
 	 
-echo "Try : vault write ssh/creds/otp_role_$temp_user ip=$server"
+echo "Try : vault write ssh-client-onetime-pass/creds/otp_role_$temp_user ip=$server"
 echo "Try : ssh $temp_user@$server" 
 echo "Vaildation : $validtime" 
  
